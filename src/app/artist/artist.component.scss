@@ -1,0 +1,207 @@
+@import './../../styles';
+
+.artist-container {
+  margin-top: 12rem;
+  margin-bottom: 15rem;
+  padding: 5rem 12rem;
+  height: 55rem;
+  overflow-y: scroll;
+}
+
+.artist-container__header {
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+  font-size: 3rem;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.search {
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  display: inline-block;
+  margin-left: 2rem;
+  border-radius: 0.5rem;
+  color: #1e1e1e;
+
+  &::placeholder {
+    color: #474747;
+  }
+}
+
+.artists-list__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #efefef;
+  height: 25rem;
+  margin: 2rem 0;
+}
+
+.artists-list__marker {
+  height: 100%;
+  width: 2.5rem;
+  background-color: #1e1e1e;
+box-shadow: 5px 0px 20px 0px rgba(0,0,0,0.4);
+}
+
+.artists-list__header {
+  h4 {
+    font-size: 2rem;
+  }
+  img {
+    display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+}
+
+.artists-list__date {
+  ul {
+    list-style: none;
+    font-size: 1.5rem;
+  }
+  ul > li {
+    margin: 1rem;
+  }
+}
+
+.artists-list__buttons{
+  margin-right: 10rem;
+}
+
+
+.modal-container{
+
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  position: fixed;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.modal-body{
+  background-color: rgba($color: #efefef, $alpha: 0.9);
+  margin-bottom: 10rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+}
+
+.modal-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  button{
+    display: block;
+  }
+}
+
+.animation {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+
+}
+
+.fadeIn{
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-form{
+  width: 100%;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3rem;
+  width: 100%;
+
+}
+
+.form-row{
+  margin: 0.5rem 0;
+  width: 100%;
+  display: flex;
+  padding: 2.15rem;
+  flex-direction: column;
+  background: #1e1e1e;
+  backdrop-filter: blur(5px);
+  border-radius: 3px;
+
+  label{
+    margin-bottom: 0.25rem;
+    color: #efefef;
+    font-weight: 700;
+    font-size: 1.5rem;
+    transition-property: border, background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+
+  label + *, input{
+
+  border: 0;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  color: #efefef;
+  background-color: transparent;
+  caret-color: #efefef;
+  outline: none;
+  background-image: linear-gradient(#efefef, #efefef);
+  background-size: 0 5px, auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all calc(0.3s*0.75) ease;
+  }
+
+  label + input:focus{
+    background-size: 100% 2px, auto;
+  }
+
+}

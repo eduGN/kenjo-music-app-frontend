@@ -1,0 +1,199 @@
+<div class="album-detail-container">
+  <div class="album-detail-container__header">
+    <h3>
+      All <span>{{ artist.name }}'s</span> albums
+    </h3>
+    <input class="search" type="text" placeholder="Search" #query  (keyup) = "filterAlbums(query.value)" />
+    <button (click)="openModalForm(create)">Add new album</button>
+  </div>
+
+  <div
+    class="album-details-list__container"
+    *ngFor="let album of filteredAlbums; let i = index"
+  >
+    <div class="album-details-list__marker"></div>
+
+    <div class="album-details-list__header">
+      <img
+        [src]="album.coverUrl"
+        alt=""
+      />
+      <h4>{{ album.title }}</h4>
+    </div>
+    <div class="album-details-list__date">
+      <ul>
+        <li>
+          year: <span>{{ album.year }}</span>
+        </li>
+        <li>
+          genre: <span>{{ album.genre }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="album-details-list__buttons">
+      <button (click) = "deleteAlbum(album._id)">Delete Album</button>
+      <button (click) ="[openModalForm(edit), setAlbum(album)]" >Edit album-detail</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #create let-modal>
+  <div class="modal-container animation fadeIn">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Añadir nuevo album</h4>
+        <button
+          type="button"
+          class="close btn"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-form">
+        <form class="form-container" (ngSubmit)="onSubmitCreate()" [formGroup]="mForm">
+          <div class="form-row">
+            <label for="title"> Title</label>
+            <input
+              type="text"
+              formControlName="title"
+              placeholder="Type album title..."
+            />
+            <div *ngIf="isSent && f.title.errors">
+              Enter a <strong>valid</strong> title
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="artistId"> Artist Id</label>
+            <input readonly type="text" [value]="artist._id"/>
+            <div *ngIf="isSent && !artist._id">
+              Enter a <strong>valid</strong> Artist id
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="coverlUrl"> Cover Url</label>
+            <input
+              type="text"
+              formControlName="coverUrl"
+              placeholder="Paste photo Url..."
+            />
+            <div *ngIf="isSent && f.coverUrl.errors">
+              Enter a <strong>valid</strong> url
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for=""> Year</label>
+            <input
+              type="number"
+              formControlName="year"
+              placeholder="Type album year of release..."
+            />
+            <div *ngIf="isSent && f.year.errors">
+              Enter a <strong>valid</strong> year
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="genre"> Genre</label>
+            <input
+              type="text"
+              formControlName="genre"
+              placeholder="Type album genre..."
+            />
+            <div *ngIf="isSent && f.genre.errors">
+              Enter a <strong>valid</strong> genre
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Album</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <div class="modal-container animation fadeIn">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Añadir nuevo album</h4>
+        <button
+          type="button"
+          class="close btn"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-form">
+        <form class="form-container" (ngSubmit)="onSubmitUpdate()" [formGroup]="mForm">
+          <div class="form-row">
+            <label for="title"> Title</label>
+            <input
+              type="text"
+              formControlName="title"
+              placeholder="Type album title..."
+              [(ngModel)] = "selectedAlbum.title"
+            />
+            <div *ngIf="isSent && f.title.errors">
+              Enter a <strong>valid</strong> title
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="artistId"> Artist Id</label>
+            <input readonly type="text" [value]="artist._id"/>
+            <div *ngIf="isSent && !artist._id">
+              Enter a <strong>valid</strong> Artist id
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="coverlUrl"> Cover Url</label>
+            <input
+              type="text"
+              formControlName="coverUrl"
+              placeholder="Paste photo Url..."
+              [(ngModel)] = "selectedAlbum.coverUrl"
+            />
+            <div *ngIf="isSent && f.coverUrl.errors">
+              Enter a <strong>valid</strong> url
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for=""> Year</label>
+            <input
+              type="number"
+              formControlName="year"
+              placeholder="Type album year of release..."
+              [(ngModel)] = "selectedAlbum.year"
+            />
+            <div *ngIf="isSent && f.year.errors">
+              Enter a <strong>valid</strong> year
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="genre"> Genre</label>
+            <input
+              type="text"
+              formControlName="genre"
+              placeholder="Type album genre..."
+              [(ngModel)] = "selectedAlbum.genre"
+            />
+            <div *ngIf="isSent && f.genre.errors">
+              Enter a <strong>valid</strong> genre
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Album</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -4,13 +4,16 @@
 
 
 $bg-primary:#1efa5f;
+$base-size-small: 10px;
+$base-size-medium: 16px;
+$base-size-large: 24px;
 
 *, *::after, *::before {
   box-sizing: border-box;
 }
 
-html, body { height: 100%; }
+html, body { height: 100%; font-size: $base-size-small ;}
 body {
   margin:0 ;
   padding: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif; }
+  font-family: Roboto, "Helvetica Neue", sans-serif;}

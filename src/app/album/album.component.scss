@@ -1,0 +1,81 @@
+@import './../../styles';
+
+.album-container {
+  margin-top: 12rem;
+  margin-bottom: 15rem;
+  padding: 5rem 12rem;
+  height: 55rem;
+  overflow-y: scroll;
+}
+
+.album-container__header {
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+  font-size: 3rem;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.search {
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  display: inline-block;
+  margin-left: 2rem;
+  border-radius: 0.5rem;
+  color: #1e1e1e;
+
+  &::placeholder {
+    color: #474747;
+  }
+}
+
+.albums-list__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #efefef;
+  height: 25rem;
+  margin: 2rem 0;
+}
+
+.albums-list__marker {
+  height: 100%;
+  width: 2.5rem;
+  background-color: #1e1e1e;
+box-shadow: 5px 0px 20px 0px rgba(0,0,0,0.4);
+}
+
+.albums-list__header {
+  h4 {
+    font-size: 2rem;
+  }
+  img {
+    display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+}
+
+.albums-list__date {
+  ul {
+    list-style: none;
+    font-size: 1.5rem;
+  }
+  ul > li {
+    margin: 1rem;
+  }
+}
+
+.albums-list__buttons{
+  margin-right: 10rem;
+}

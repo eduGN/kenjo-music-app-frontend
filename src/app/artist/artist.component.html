@@ -1,0 +1,177 @@
+<div class="artist-container">
+  <div class="artist-container__header">
+  <h3>All Artists</h3>
+  <input class="search" type="text" placeholder="Search" #query (keyup)="filterArtists(query.value)"/>
+  <button (click)="openModalForm(create)">Add New Artist</button>
+  </div>
+
+  <div class="artists-list__container" *ngFor="let artist of filteredArtists; let i=index">
+
+    <div class="artists-list__marker">
+    </div>
+
+    <div class="artists-list__header">
+      <img [src]="artist.photoUrl" alt=""/>
+      <h4>{{artist.name}}</h4>
+    </div>
+    <div class="artists-list__date">
+      <ul>
+        <li>Birthdate: <span>{{artist.birthdate | date: 'EEEE dd, MMMM, yyyy' }}</span></li>
+        <li>Deathdate: <span>{{artist.deathDate | date: 'EEEE dd, MMMM, yyyy' }}</span></li>
+      </ul>
+    </div>
+
+    <div class="artists-list__buttons">
+      <button (click) = "deleteArtist(artist._id)">Delete Artist</button>
+      <button (click) ="[openModalForm(edit), setArtist(artist)]" >Edit Artist</button>
+      <a [routerLink]="['/artist', artist._id]">Show Albums</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #create let-modal>
+  <div class="modal-container animation fadeIn">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Artist</h4>
+        <button
+          type="button"
+          class="close btn"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-form">
+        <form class="form-container" (ngSubmit)="onSubmitCreate()" [formGroup]="mForm">
+          <div class="form-row">
+            <label for="name"> Name</label>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Type album name..."
+            />
+            <div *ngIf="isSent && f.name.errors">
+              Enter a <strong>valid</strong> name
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="photoUrl"> Photo Url</label>
+            <input
+              type="text"
+              formControlName="photoUrl"
+              placeholder="Paste photo Url..."
+            />
+            <div *ngIf="isSent && f.photoUrl.errors">
+              Enter a <strong>valid</strong> url
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="birthdate"> Birthdate</label>
+            <input
+              type="date"
+              formControlName="birthdate"
+              placeholder="Select Birthdate ..."
+            />
+            <div *ngIf="isSent && f.birthdate.errors">
+              Enter a <strong>valid</strong> birthdate
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="deathdate"> Death date</label>
+            <input
+              type="date"
+              formControlName="deathDate"
+              placeholder="Select deathdate ..."
+            />
+            <div *ngIf="isSent && f.deathDate.errors">
+              Enter a <strong>valid</strong> deathdate
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Create Artist</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <div class="modal-container animation fadeIn">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit New Artist</h4>
+        <button
+          type="button"
+          class="close btn"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-form">
+        <form class="form-container" (ngSubmit)="onSubmitUpdate()" [formGroup]="mForm">
+          <div class="form-row">
+            <label for="name"> Name</label>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Type album name..."
+              [(ngModel)] = "selectedArtist.name"
+            />
+            <div *ngIf="isSent && f.name.errors">
+              Enter a <strong>valid</strong> name
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="photoUrl"> Photo Url</label>
+            <input
+              type="text"
+              formControlName="photoUrl"
+              placeholder="Paste photo Url..."
+              [(ngModel)] = "selectedArtist.photoUrl"
+            />
+            <div *ngIf="isSent && f.photoUrl.errors">
+              Enter a <strong>valid</strong> url
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="birthdate"> Birthdate</label>
+            <input
+              type="date"
+              formControlName="birthdate"
+              placeholder="Select Birthdate ..."
+              [(ngModel)] = "selectedArtist.birthdate"
+            />
+            <div *ngIf="isSent && f.birthdate.errors">
+              Enter a <strong>valid</strong> birthdate
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="deathdate"> Death date</label>
+            <input
+              type="date"
+              formControlName="deathDate"
+              placeholder="Select deathdate ..."
+              [(ngModel)] = "selectedArtist.deathDate "
+            />
+            <div *ngIf="isSent && f.deathDate.errors">
+              Enter a <strong>valid</strong> deathdate
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Update Artist</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+

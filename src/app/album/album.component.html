@@ -1,0 +1,38 @@
+
+<div class="album-container">
+  <div class="album-container__header">
+    <h3>
+      All Albums
+    </h3>
+    <input class="search" type="text" placeholder="Search" #query (keyup) = "filterAllAlbums(query.value)"/>
+  </div>
+
+  <div
+    class="albums-list__container"
+    *ngFor="let album of filteredAlbums; let i = index"
+  >
+    <div class="albums-list__marker"></div>
+
+    <div class="albums-list__header">
+      <img
+        [src]="album.coverUrl"
+        alt=""
+      />
+      <h4>{{ album.title }}</h4>
+    </div>
+    <div class="albums-list__date">
+      <ul>
+        <li>
+          year: <span>{{ album.year }}</span>
+        </li>
+        <li>
+          genre: <span>{{ album.genre }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="albums-list__buttons">
+       {{album.artistName}}
+    </div>
+  </div>
+</div>

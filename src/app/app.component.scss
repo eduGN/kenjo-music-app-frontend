@@ -7,10 +7,19 @@
 .app-container{
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
-  background-color: $bg-primary;
+  flex-direction: column;
+  background-color: white;
+}
+
+
+
+app-footer{
+  width: 100%;
+  height: 15rem ;
+  margin-top: auto;
+  background-color: #1e1e1e;
 }
 
 
