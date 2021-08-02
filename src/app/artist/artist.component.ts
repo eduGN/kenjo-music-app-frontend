@@ -5,6 +5,7 @@ import { Artist } from './artist.model';
 import { ArtistService } from './artist.service';
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { tap, map, catchError } from 'rxjs/operators';
+import { faEdit, faEye, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -20,11 +21,15 @@ export class ArtistComponent implements OnInit, OnDestroy {
   mForm: FormGroup
   isSent: boolean = false
   subs = new SubsContainer()
+  faPlus = faPlusCircle
+  faTrash = faTrash
+  faEye = faEye
+  faEdit = faEdit
 
   constructor(private artistService: ArtistService,private modal: NgbModal,
     private fb: FormBuilder) {
       this.mForm = this.fb.group({
-        name: [this.selectedArtist.name, [Validators.required, Validators.pattern(/^[a-záéíóúA-ZÁÉÍÓÚ][a-záéíóúA-ZÁÉÍÓÚ0-9\s]+[a-záéíóúA-ZÁÉÍÓÚ0-9]$/)]],
+        name: [this.selectedArtist.name, [Validators.required, Validators.pattern(/^[a-záéíóúA-ZÁÉÍÓÚ0-9][a-záéíóúA-ZÁÉÍÓÚ'0-9\-\s]+[a-záéíóúA-ZÁÉÍÓÚ0-9]$/)]],
         photoUrl: [this.selectedArtist.photoUrl, [Validators.required/*  Validators.pattern(/^[a-záéíóúA-ZÁÉÍÓÚ0-9][a-záéíóúA-ZÁÉÍÓÚ0-9-_\.]+\.[a-záéíóúA-ZÁÉÍÓÚ0-9]{2,4}/) */]],
         birthdate: [this.selectedArtist.birthdate, [Validators.required, Validators.pattern(/^\d{4}([./-])\d{2}\1\d{2}$/)]],
         deathDate: [this.selectedArtist.deathDate, [Validators.required,  Validators.pattern(/^\d{4}([./-])\d{2}\1\d{2}$/)]],
@@ -50,7 +55,6 @@ export class ArtistComponent implements OnInit, OnDestroy {
       tap((response: Artist[]) => {
         this.allArtists = response.map(artist => new Artist(artist))
         this.filteredArtists = [...this.allArtists]
-        console.log(this.allArtists)
       })).subscribe()
   }
 
@@ -70,12 +74,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
     this.isSent = true
     if (this.mForm.invalid) {
-      console.log("Formulario Inválido");
       return
     }
-    console.log("Enviar form");
-    console.log(this.f)
-
     const artist = new Artist()
 
     artist.name = this.f.name.value
@@ -91,11 +91,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
   onSubmitUpdate(){
     this.isSent = true
     if (this.mForm.invalid) {
-      console.log("Formulario Inválido");
       return
     }
-
-    console.log(this.f)
 
     const artist = new Artist()
 
@@ -129,14 +126,12 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
    if(!artistId) return
    this.subs.add = this.artistService.deleteArtist(artistId).subscribe(res =>{
-     console.log('Deleted Artist',res)
      this.loadArtists()
     })
   }
 
   ngOnDestroy(): void {
     this.subs.dispose()
-    console.log(this.subs)
   }
 
 }

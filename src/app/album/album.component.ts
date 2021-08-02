@@ -3,8 +3,8 @@ import { SubsContainer } from './../subs-container';
 import { tap } from 'rxjs/operators';
 import { AlbumService } from './album.service';
 import { Album } from './album.model';
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { faUserTag, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-album',
@@ -17,17 +17,17 @@ export class AlbumComponent implements OnInit {
   selectedAlbum = new Album()
   filteredAlbums: Album[] = []
   subs = new SubsContainer()
+  faUserTag = faUserTag
+  faTimes = faTimes
 
   constructor(private albumService: AlbumService, private artistService: ArtistService) { }
 
   ngOnInit(): void {
-
     this.getAlbums()
   }
 
   ngOnDestroy(): void {
-   this.subs.dispose()
-
+    this.subs.dispose()
   }
 
   getAlbums(): void {
@@ -38,27 +38,28 @@ export class AlbumComponent implements OnInit {
     ).subscribe()
   }
 
-  setCurrArtistName(album: Album): void {
-    this.subs.add = this.artistService.getArtistById(album.artistId)
-    .subscribe(res => {
-      album.artistName = res.name
-      const formatedAlbum = new Album(album)
-      this.allAlbums = [...this.allAlbums, formatedAlbum]
-      this.filteredAlbums = [...this.allAlbums]
+  deleteAlbum(albumId: string | undefined): void {
 
-      console.log('All Albums', this.allAlbums)
-      console.log('Filtered Albums', this.filteredAlbums)
-
+    if (!albumId) return
+    this.subs.add = this.albumService.deleteAlbum(albumId).subscribe(res => {
+      this.allAlbums = []
+      this.getAlbums()
     })
   }
 
-  filterAllAlbums(query: string): void {
-
-    const reg = new RegExp(`(${query})`, 'gi')
-    this.filteredAlbums = this.allAlbums.filter(album => album.title.match(reg))
-
+  setCurrArtistName(album: Album): void {
+    this.subs.add = this.artistService.getArtistById(album.artistId)
+      .subscribe(res => {
+        album.artistName = res ? res.name : "No artist"
+        const formatedAlbum = new Album(album)
+        this.allAlbums = [...this.allAlbums, formatedAlbum]
+        this.filteredAlbums = [...this.allAlbums]
+      })
   }
 
-
+  filterAllAlbums(query: string): void {
+    const reg = new RegExp(`(${query})`, 'gi')
+    this.filteredAlbums = this.allAlbums.filter(album => album.title.match(reg))
+  }
 }
 

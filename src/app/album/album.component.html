@@ -4,13 +4,17 @@
     <h3>
       All Albums
     </h3>
-    <input class="search" type="text" placeholder="Search" #query (keyup) = "filterAllAlbums(query.value)"/>
+    <input class="search" type="text" placeholder="Type album name..." #query (keyup) = "filterAllAlbums(query.value)"/>
   </div>
+  <div class="results-counter__container">{{filteredAlbums.length}} albums found</div>
 
   <div
     class="albums-list__container"
     *ngFor="let album of filteredAlbums; let i = index"
   >
+  <button (click)="deleteAlbum(album._id)" class="btn-delete">
+    <fa-icon [icon] = "faTimes" ></fa-icon>
+  </button>
     <div class="albums-list__marker"></div>
 
     <div class="albums-list__header">
@@ -31,8 +35,8 @@
       </ul>
     </div>
 
-    <div class="albums-list__buttons">
-       {{album.artistName}}
+    <div class="albums-list__artist">
+       <fa-icon [icon] = "faUserTag" ></fa-icon><span>{{album.artistName}}</span>
     </div>
   </div>
 </div>

@@ -3,212 +3,237 @@
 .album-detail-container {
   margin-top: 12rem;
   margin-bottom: 15rem;
-  padding: 5rem 12rem;
-  height: 55rem;
-  overflow-y: scroll;
-  position: relative;
+  padding: 5rem 30rem;
+  height: 60vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar{
+    width: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-track{
+    background-color: $dark;
+  }
+
+  &::-webkit-scrollbar-thumb{
+
+    background-color: $create;
+  }
+
 }
 
 .album-detail-container__header {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
 }
 
 h3 {
+  color: $dark;
   font-size: 3rem;
   display: inline-block;
-  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
 
   span{
-    color: #197a0c;
+    color: $create;
   }
 }
 
 .search {
   font-size: 1.5rem;
-  padding: 0.25rem;
+  margin: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
   display: inline-block;
   margin-left: 2rem;
-  border-radius: 0.5rem;
-  color: #1e1e1e;
+  border: 3px solid transparent;
+  background-color:rgba($color: $light, $alpha: 0.4); ;
+  color: $dark;
+  transition: all 0.75s ease-in;
 
   &::placeholder {
-    color: #474747;
+    color: rgba($color: $gray, $alpha: 0.5);
   }
+
+  &:focus {
+    outline: none;
+    border: 3px solid $create ;
+    border-radius: 2px;
+  }
+}
+
+.results-counter__container{
+  font-size: 1.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
 }
 
 .album-details-list__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #efefef;
+  background-color: $light;
   height: 25rem;
-  margin: 2rem 0;
+  margin: 4rem 0;
+  border: 2px solid transparent;
+  transition: border 0.4s ease-in-out;
+
+  &:hover{
+    border: 2px solid $create;
+  }
 }
 
 .album-details-list__marker {
-  height: 100%;
+  height: 105%;
   width: 2.5rem;
-  background-color: #1e1e1e;
-box-shadow: 5px 0px 20px 0px rgba(0,0,0,0.4);
+  background-color: $dark;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 .album-details-list__header {
   h4 {
+    padding: 0;
+    margin: 0.5rem;
     font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+
   }
   img {
     display: inline-block;
-    width: 15rem;
+    width: 17rem;
     height: 15rem;
-    border-radius: 50%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
   }
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-
-}
-
-.album-details-list__date {
-  ul {
-    list-style: none;
-    font-size: 1.5rem;
-  }
-  ul > li {
-    margin: 1rem;
-  }
-}
-
-.album-details-list__buttons{
-  margin-right: 10rem;
-}
-
-.modal-container{
-
-  background-color: rgba($color: #000000, $alpha: 0.7);
-  position: fixed;
-  display: grid;
-  place-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-.modal-body{
-  background-color: rgba($color: #efefef, $alpha: 0.9);
-  margin-bottom: 10rem;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50rem;
-}
-
-.modal-header{
+  height: 100%;;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  button{
-    display: block;
-  }
-}
-
-.animation {
-  animation-duration: 2s;
-  animation-fill-mode: both;
-
-  -webkit-animation-duration: 2s;
-  -webkit-animation-fill-mode: both;
 
 }
 
-.fadeIn{
-  animation-name: fadeIn;
-  -webkit-animation-name: fadeIn;
-}
+.album-details-list__date {
+  margin-left: -5rem;
+  ul {
+    list-style: none;
+    font-size: 2rem;
 
-@keyframes fadeIn {
+    li {
+      margin: 1rem;
 
-  from {
-    opacity: 0;
+      span{
+        font-weight: 700;
+      }
+    }
   }
 
-  to {
-    opacity: 1;
-  }
 }
 
-@-webkit-keyframes fadeIn {
-
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.modal-form{
-  width: 100%;
-}
-
-.form-container{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 3rem;
-  width: 100%;
-
-}
-
-.form-row{
-  margin: 0.5rem 0;
-  width: 100%;
-  display: flex;
-  padding: 2.15rem;
-  flex-direction: column;
-  background: #1e1e1e;
-  backdrop-filter: blur(5px);
-  border-radius: 3px;
-
-  label{
-    margin-bottom: 0.25rem;
-    color: #efefef;
-    font-weight: 700;
-    font-size: 1.5rem;
-    transition-property: border, background-color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
-  }
-
-  label + *, input{
-
-  border: 0;
-  padding: 0.75rem;
-  font-size: 1.25rem;
-  color: #efefef;
-  background-color: transparent;
-  caret-color: #efefef;
+button, a {
+  text-decoration: none;
+  margin: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
   outline: none;
-  background-image: linear-gradient(#efefef, #efefef);
-  background-size: 0 5px, auto;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  transition: all calc(0.3s*0.75) ease;
-  }
-
-  label + input:focus{
-    background-size: 100% 2px, auto;
-  }
-
+  border: none;
+  cursor: pointer;
+  color: $light;
+  font-weight: 700;
+  display: inline-block;
 }
+
+.btn-create {
+  background-color: $create;
+  transition: all 0.2s ease-in-out;
+    &:hover{
+      filter: brightness(0.75);
+    }
+}
+
+.btn-cancel {
+  background-color: $dark;
+  border-radius: 5px;
+}
+
+.album-details-list__buttons{
+  margin-right: 7.5rem;
+  display: flex;
+  flex-direction: row;
+
+  .btn-delete {
+    background-color: $delete;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    &:hover{
+      filter: brightness(0.75);
+    }
+  }
+
+  .btn-edit {
+    background-color: $edit;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+
+    &:hover{
+      filter: brightness(0.75);
+    }
+  }
+}
+
+@media screen and (max-width: 1396px) {
+
+  .album-detail-container {
+    padding: 5rem 27rem;
+  }
+
+  .album-details-list__buttons{
+    margin-right: 5rem;
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .album-detail-container {
+    padding: 5rem 25rem;
+  }
+}
+
+
+@media screen and (max-width: 896px) {
+  .album-detail-container {
+    padding: 5rem 22.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .album-detail-container {
+    padding: 5rem 20rem;
+  }
+}
+
+@media screen and (max-width: 598px) {
+
+  .album-detail-container {
+    margin-top: 20rem;
+  }
+
+  .album-detail-container {
+    padding: 5rem 15rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .album-detail-container {
+    padding: 5rem 10rem;
+  }
+}
+
+
 
 
 

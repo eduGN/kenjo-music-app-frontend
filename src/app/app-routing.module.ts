@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: "", component: ArtistComponent, pathMatch: "full"},
   { path: "albums", component: AlbumComponent },
   { path: "artists", component: ArtistComponent },
   {path: "artist/:id", component: AlbumDetailComponent}

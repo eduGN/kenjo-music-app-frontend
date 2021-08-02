@@ -9,10 +9,7 @@ export class NavBarComponent implements OnInit {
 
   constructor() { }
 
-  items: any[] = [{
-    path: '',
-    name: 'Home'
-  },
+  items: any[] = [
   {
     path: 'albums',
     name: 'Albums'
@@ -20,10 +17,6 @@ export class NavBarComponent implements OnInit {
   {
     path: 'artists',
     name: 'Artists'
-  },
-  {
-    path: '',
-    name: 'Incomming Features'
   }]
 
 

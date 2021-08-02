@@ -3,79 +3,228 @@
 .album-container {
   margin-top: 12rem;
   margin-bottom: 15rem;
-  padding: 5rem 12rem;
-  height: 55rem;
-  overflow-y: scroll;
+  padding: 5rem 30rem;
+  height: 60vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar{
+    width: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-track{
+    background-color: $dark;
+  }
+
+  &::-webkit-scrollbar-thumb{
+
+    background-color: $create;
+  }
 }
 
 .album-container__header {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
 }
 
 h3 {
+  color: $dark;
   font-size: 3rem;
   display: inline-block;
-  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
+
+  span{
+    color: $create;
+  }
 }
 
 .search {
   font-size: 1.5rem;
-  padding: 0.25rem;
+  margin: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
   display: inline-block;
   margin-left: 2rem;
-  border-radius: 0.5rem;
-  color: #1e1e1e;
+  border: 3px solid transparent;
+  background-color:rgba($color: $light, $alpha: 0.4); ;
+  color: $dark;
+  transition: all 0.75s ease-in;
 
   &::placeholder {
-    color: #474747;
+    color: rgba($color: $gray, $alpha: 0.5);
   }
+
+  &:focus {
+    outline: none;
+    border: 3px solid $create ;
+    border-radius: 2px;
+  }
+}
+
+.results-counter__container{
+  font-size: 1.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
 }
 
 .albums-list__container {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between;
-  background-color: #efefef;
+  background-color: $light;
   height: 25rem;
-  margin: 2rem 0;
+  margin: 4rem 0;
+  border: 2px solid transparent;
+  transition: border 0.4s ease-in-out;
+
+  &:hover{
+    border: 2px solid $create;
+  }
 }
 
+
 .albums-list__marker {
-  height: 100%;
+  height: 105%;
   width: 2.5rem;
-  background-color: #1e1e1e;
-box-shadow: 5px 0px 20px 0px rgba(0,0,0,0.4);
+  background-color: $dark;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 .albums-list__header {
   h4 {
+    padding: 0;
+    margin: 0.5rem;
     font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
   }
   img {
     display: inline-block;
-    width: 15rem;
+    width: 20rem;
     height: 15rem;
-    border-radius: 50%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
   }
-
+  height: 100%;;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  justify-content: center;
+
 
 }
 
 .albums-list__date {
+  margin-left: -5rem;
   ul {
     list-style: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
+
+    li {
+      margin: 1rem;
+
+      span{
+        font-weight: 700;
+      }
+    }
   }
-  ul > li {
-    margin: 1rem;
+
+}
+
+button, a {
+  text-decoration: none;
+  margin: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: $light;
+  font-weight: 700;
+  border-radius: 3px;
+
+}
+
+.btn-delete {
+  background-color: $delete;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    &:hover{
+      filter: brightness(0.75);
+    }
+}
+
+
+
+.albums-list__artist{
+  margin-right: 2rem;
+  font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-weight: 900;
+
+  span{
+    display: inline-block;
+    width: 15rem;
   }
 }
 
-.albums-list__buttons{
-  margin-right: 10rem;
+@media screen and (max-width: 1396px) {
+
+  .album-container {
+    padding: 5rem 27rem;
+  }
+
+  .albums-list__buttons{
+    margin-right: 5rem;
+    display: flex;
+    flex-direction: column;
+  }
 }
+@media screen and (max-width: 1024px) {
+  .album-container {
+    padding: 5rem 25rem;
+  }
+}
+
+
+@media screen and (max-width: 896px) {
+  .album-container {
+    padding: 5rem 22.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .album-container {
+    padding: 5rem 20rem;
+  }
+}
+
+@media screen and (max-width: 598px) {
+
+  .album-container {
+    margin-top: 20rem;
+  }
+
+  .album-container {
+    padding: 5rem 15rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .album-container {
+    padding: 5rem 10rem;
+  }
+}
+
+
+
+
+

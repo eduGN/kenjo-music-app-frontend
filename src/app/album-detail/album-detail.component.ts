@@ -1,3 +1,4 @@
+import { faPlusCircle, faTrash, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { SubsContainer } from './../subs-container';
 import { ArtistService } from './../artist/artist.service';
 import { Artist } from './../artist/artist.model';
@@ -25,6 +26,12 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
   isSent: boolean = false
   subs = new SubsContainer()
 
+  faPlus = faPlusCircle
+  faTrash = faTrash
+  faEdit = faEdit
+  faTimes = faTimes
+
+
   constructor(private albumService: AlbumService, private artistService: ArtistService,
     private activatedRoute: ActivatedRoute, private modal: NgbModal,
     private fb: FormBuilder) {
@@ -49,9 +56,8 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
 
   getAlbumOfArtist(): void {
 
-   this.subs.add = this.activatedRoute.params.subscribe(params => {
+    this.subs.add = this.activatedRoute.params.subscribe(params => {
       const id = params['id'] ? params['id'] as string : ''
-      console.log(id)
       this.getAlbums(id)
       this.getArtist(id)
     })
@@ -63,7 +69,6 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
         this.allAlbums = res.filter(album => album.artistId === id)
         this.allAlbums = this.allAlbums.map((album: any) => new Album(album))
         this.filteredAlbums = [...this.allAlbums]
-        console.log(this.allAlbums)
       })
     ).subscribe()
   }
@@ -71,14 +76,13 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
   getArtist(id: string): void {
     this.subs.add = this.artistService.getArtistById(id).pipe().subscribe(res => {
       this.artist = new Artist(res)
-      console.log(this.artist)
     })
   }
 
   saveAlbum(album: Album): void {
     this.subs.add = this.albumService.saveAlbum(album).pipe(
       tap(res => console.log(res))
-    ).subscribe(res=>{
+    ).subscribe(res => {
       this.getAlbumOfArtist()
     })
   }
@@ -95,12 +99,8 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
 
     this.isSent = true
     if (this.mForm.invalid) {
-      console.log("Formulario Inválido");
       return
     }
-    console.log("Enviar form");
-    console.log(this.f)
-
     const album = new Album()
 
     album.artistId = this.artist._id as string
@@ -114,15 +114,11 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
 
   }
 
-  onSubmitUpdate(){
+  onSubmitUpdate() {
     this.isSent = true
     if (this.mForm.invalid) {
-      console.log("Formulario Inválido");
       return
     }
-
-    console.log(this.f)
-
     const album = new Album()
 
     album._id = this.selectedAlbum._id
@@ -136,20 +132,19 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
     this.isSent = false
   }
 
-  updateAlbum(album: Album):void {
+  updateAlbum(album: Album): void {
     this.subs.add = this.albumService.updateAlbum(album).pipe(
       tap(res => console.log(res))
-    ).subscribe(res=>{
+    ).subscribe(res => {
       this.getAlbumOfArtist()
     })
   }
 
-  deleteAlbum(albumId: string | undefined):void{
+  deleteAlbum(albumId: string | undefined): void {
 
-   if(!albumId) return
-   this.subs.add = this.albumService.deleteAlbum(albumId).subscribe(res =>{
-     console.log('Deleted Album',res)
-     this.getAlbumOfArtist()
+    if (!albumId) return
+    this.subs.add = this.albumService.deleteAlbum(albumId).subscribe(res => {
+      this.getAlbumOfArtist()
     })
   }
 
@@ -162,7 +157,6 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.dispose()
-    console.log(this.subs)
   }
 
 }

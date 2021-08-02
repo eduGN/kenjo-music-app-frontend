@@ -4,8 +4,9 @@
 
 .navbar {
   width: 100%;
-  background-color: #efefef;
+  background-color: $light;
   position: fixed;
+  height: 10vh;
 }
 
 .navbar-nav{
@@ -19,23 +20,29 @@
   width: 100%;
 }
 
-.nav-link{
-  display: block;
-  padding: 5rem 0;
-  text-align: center;
-  width: calc(100vw/4);
+.nav-item{
   text-decoration: none;
+}
+
+.nav-link{
+
+  display: grid;
+  place-items: center;
+  height: 10vh;
+  text-align: center;
+  width: 50vw;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  color: #1e1e1e;
-  font-size: 2rem;
+  color: $dark;
+  font-size: 2.75rem;
   transition-property: background-color, color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
 
 
   &:hover{
-     background-color: #1e1e1e;
-     color: #efefef;
+     background-color: $dark;
+     color: $light;
   }
 }
 

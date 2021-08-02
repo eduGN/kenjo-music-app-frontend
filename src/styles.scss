@@ -1,19 +1,211 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Contrail+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Contrail+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap');
 
+$light: #efefef;
+$dark: #1e1e1e;
+$gray: #474747;
+$delete: #ff3c45;
+$edit: #ffa048;
+$show: #5baff8;
+$create: #20cc95;
+$base-size-smaller: 4px;
+$base-size-small: 5px;
+$base-size-medium-s: 6px;
+$base-size-medium-x: 7px;
+$base-size-medium-xl: 8px;
+$base-size-large: 9px;
+$base-size-larger: 10px;
 
-$bg-primary:#1efa5f;
-$base-size-small: 10px;
-$base-size-medium: 16px;
-$base-size-large: 24px;
-
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
-html, body { height: 100%; font-size: $base-size-small ;}
+html,
 body {
-  margin:0 ;
+  height: 100%;
+  font-size: $base-size-larger;
+}
+
+@media screen and (max-width: 1200px) {
+  body, html {
+    font-size: $base-size-large;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  body, html {
+    font-size: $base-size-medium-xl;
+  }
+}
+
+
+@media screen and (max-width: 896px) {
+  body, html {
+    font-size: $base-size-medium-x;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body, html {
+    font-size: $base-size-medium-s;
+  }
+}
+
+@media screen and (max-width: 596px) {
+  body, html {
+    font-size: $base-size-small;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  body, html {
+    font-size: $base-size-smaller;
+  }
+}
+
+
+body {
+  margin: 0;
   padding: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;}
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.modal-container {
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  position: fixed;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.modal-body {
+  background-color: rgba($color: #efefef, $alpha: 0.9);
+  margin-bottom: 10rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    display: block;
+  }
+
+  .modal-title{
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+
+  }
+}
+
+.animation {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-form {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3rem;
+  width: 100%;
+}
+
+.form-row {
+  margin: 0.5rem 0;
+  width: 100%;
+  display: flex;
+  padding: 2.15rem;
+  flex-direction: column;
+  background: $dark;
+  backdrop-filter: blur(5px);
+  border-radius: 3px;
+
+  label {
+    margin-bottom: 0.25rem;
+    color: $light;
+    font-weight: 700;
+    font-size: 1.5rem;
+    transition-property: border, background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+
+  label + *,
+  input {
+    border: 0;
+    padding: 1rem;
+    font-size: 1.25rem;
+    color: rgba($color: $light, $alpha: 0.85);
+    background-color: transparent;
+    caret-color: $light;
+    outline: none;
+    background-image: linear-gradient($light, $light);
+    background-size: 0 5px, auto;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: all calc(0.3s * 0.75) ease;
+  }
+
+  label + input:focus {
+    background-size: 100% 2px, auto;
+  }
+
+  .form-row__error{
+    margin-top: 0.5rem;
+    color: $delete;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: all 0.2s ease-in;
+    font-size: 1.25rem;
+  }
+}
